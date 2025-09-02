@@ -1,0 +1,11 @@
+name: Welcome Workflow
+
+on:
+  workflow_dispatch:  # Allows manual triggering from the GitHub UI
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Welcome Message
+        run: echo "Welcome to the GitHub Actions Workflow!"
