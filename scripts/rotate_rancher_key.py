@@ -5,6 +5,19 @@ import os
 import nacl.public
 import logging
 
+###### Remove this #############
+###### Added For Testing #######
+import hashlib
+
+def print_secret_hash(secret_value: str):
+    try:
+        sha256_hash = hashlib.sha256(secret_value.encode()).hexdigest()
+        logging.info(f"🔒 SHA256 hash of RANCHER_ACCESS_SECRET_VALUE: {sha256_hash}")
+    except Exception as e:
+        logging.warning(f"Could not compute hash of secret: {e}")
+
+################################
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s"
@@ -116,6 +129,10 @@ def main():
         full_token = new_api_key["token"]
         access_key, secret_key = full_token.split(":")
         new_api_secret = {"access_key": access_key, "secret_key": secret_key}
+
+###### Added For Testing #######
+        print_secret_hash(json.dumps(new_api_secret))
+################################
 
         public_key_info = get_github_env_public_key(config["repo"], config["github_environment"], config["github_token"])
         encrypted_value = encrypt_secret(public_key_info["key"], json.dumps(new_api_secret))
