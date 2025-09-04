@@ -8,4 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print Welcome Message
-        run: echo "Welcome to the GitHub Actions Workflow!"
+        env:
+          TARGET_ENVIRONMENT: ${{ github.event.inputs.environment }}
+          RANCHER_URL: ${{ secrets.RANCHER_URL }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          RANCHER_ACCESS_SECRET_VALUE: ${{ secrets.RANCHER_ACCESS_SECRET_VALUE }}
+          WORKFLOW_FILE: ${{ secrets.WORKFLOW_FILE }}
+          REPO: ${{ github.repository }}
+      - run: |
+          echo "TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT}"
+          echo "RANCHER_URL=${RANCHER_URL}"
+          echo "GITHUB_TOKEN=${GITHUB_TOKEN}"
+          echo "RANCHER_ACCESS_SECRET_VALUE=${RANCHER_ACCESS_SECRET_VALUE}"
+          echo "WORKFLOW_FILE=${WORKFLOW_FILE}"
+          echo "REPO=${REPO}"
