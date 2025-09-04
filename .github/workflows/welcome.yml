@@ -15,7 +15,7 @@ jobs:
           RANCHER_ACCESS_SECRET_VALUE: ${{ secrets.RANCHER_ACCESS_SECRET_VALUE }}
           WORKFLOW_FILE: ${{ secrets.WORKFLOW_FILE }}
           REPO: ${{ github.repository }}
-      - run: |
+        run: |
           echo "TARGET_ENVIRONMENT=${TARGET_ENVIRONMENT}"
           echo "RANCHER_URL=${RANCHER_URL}"
           echo "GITHUB_TOKEN=${GITHUB_TOKEN}"
