@@ -23,7 +23,7 @@ jobs:
         python-version: '3.11'
 
     - name: Install dependencies
-      run: pip install requests pynacl
+      run: pip install -r scripts/requirements.txt
 
     - name: Run Rancher API key rotation
       env:
