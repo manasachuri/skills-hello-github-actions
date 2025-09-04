@@ -118,7 +118,7 @@ def main():
         new_api_secret = {"access_key": access_key, "secret_key": secret_key}
 
 ##### Remove This - Added For Testing #####
-        logging.info("New Rancher API key: \n%s", json.dumps(new_api_key))
+        logging.info("New Rancher API key: \n%s", json.dumps(new_api_secret))
 ###########################################
 
         public_key_info = get_github_env_public_key(config["repo"], config["github_environment"], config["github_token"])
