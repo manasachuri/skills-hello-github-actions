@@ -10,7 +10,7 @@ on:
 
 jobs:
   rotate-key:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-aa
     environment: ${{ github.event.inputs.environment }}
 
     steps:
