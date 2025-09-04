@@ -1,0 +1,36 @@
+name: Rotate Rancher API Key
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment (Sandbox, NonProd, Prod)'
+        required: true
+        default: 'Sandbox'
+
+jobs:
+  rotate-key:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install requests pynacl
+
+    - name: Run Rancher API key rotation
+      env:
+        TARGET_ENVIRONMENT: ${{ github.event.inputs.environment }}
+        RANCHER_URL: ${{ secrets.RANCHER_URL }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        RANCHER_ACCESS_SECRET_VALUE: ${{ secrets.RANCHER_ACCESS_SECRET_VALUE }}
+        WORKFLOW_FILE: ${{ secrets.WORKFLOW_FILE }}
+        REPO: ${{ github.repository }}
+      run: python ./scripts/rotate_rancher_key.py
