@@ -14,8 +14,15 @@ jobs:
     environment: ${{ github.event.inputs.environment }}
 
     steps:
-      - name: Print Welcome Message
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Print Rancher Secret Hash
         env:
           RANCHER_ACCESS_SECRET_VALUE: ${{ secrets.RANCHER_ACCESS_SECRET_VALUE }}
-        run: |
-          echo "Secret hash: $(echo "${RANCHER_ACCESS_SECRET_VALUE}" | sha256sum)"
+        run: python scripts/print_rancher_secrets.py
