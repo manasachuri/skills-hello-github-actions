@@ -33,4 +33,4 @@ jobs:
         RANCHER_ACCESS_SECRET_VALUE: ${{ secrets.RANCHER_ACCESS_SECRET_VALUE }}
         WORKFLOW_FILE: ${{ secrets.WORKFLOW_FILE }}
         REPO: ${{ github.repository }}
-      run: python ./scripts/rotate_rancher_key.py
+      run: python scripts/rotate_rancher_key.py
