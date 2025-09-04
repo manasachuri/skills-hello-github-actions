@@ -117,10 +117,6 @@ def main():
         access_key, secret_key = full_token.split(":")
         new_api_secret = {"access_key": access_key, "secret_key": secret_key}
 
-##### Remove This - Added For Testing #####
-        logging.info("New Rancher API key: \n%s", json.dumps(new_api_secret))
-###########################################
-
         public_key_info = get_github_env_public_key(config["repo"], config["github_environment"], config["github_token"])
         encrypted_value = encrypt_secret(public_key_info["key"], json.dumps(new_api_secret))
         update_github_env_secret(config["repo"], config["github_environment"], config["secret_name"], encrypted_value, public_key_info["key_id"], config["github_token"])
